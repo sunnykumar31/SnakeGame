@@ -1,6 +1,9 @@
 const canvas=document.getElementById('canvas');
-// const pen=canvas.getContext('2d');
 const pen = canvas.getContext('2d');
+const buttons=document.querySelectorAll('button');
+const Easy=document.getElementById('Easy');
+const Medium=document.getElementById('Medium');
+const Hard=document.getElementById('Hard');
 pen.fillStyle='yellow';
 
 const cs=25;
@@ -8,6 +11,7 @@ const H=650;
 const W=1200;
 let food=null;
 let score=0;
+let maximumScore=0;
 
 const Snake={
     inlen:3,
@@ -45,6 +49,11 @@ const Snake={
             if(nextY*cs<0){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
+                if(score>maximumScore){
+                    maximumScore=score;
+                    pen.fillStyle='Green';
+                    pen.fillText(`Highest Score ${maximumScore}`,500,300);
+                }
                 clearInterval(id);
             }
         }
@@ -54,6 +63,11 @@ const Snake={
             if(nextY*cs>=H){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
+                if(score>maximumScore){
+                    maximumScore=score;
+                    pen.fillStyle='Green';
+                    pen.fillText(`Highest Score ${maximumScore}`,500,300);
+                }
                 clearInterval(id);
             }
         }
@@ -63,6 +77,11 @@ const Snake={
             if(nextX*cs>=W){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
+                if(score>maximumScore){
+                    maximumScore=score;
+                    pen.fillStyle='Green';
+                    pen.fillText(`Highest Score ${maximumScore}`,500,300);
+                }
                 clearInterval(id);
             }
         }
@@ -72,6 +91,11 @@ const Snake={
             if(nextX*cs<0){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
+                if(score>maximumScore){
+                    maximumScore=score;
+                    pen.fillStyle='Green';
+                    pen.fillText(`Highest Score ${maximumScore}`,500,300);
+                }
                 clearInterval(id);
             }
         }
@@ -109,12 +133,9 @@ function init(){
 function Draw(){
     pen.clearRect(0, 0, W, H);
     pen.font = '40px sans-serif';
-    // pen.fillStyle='blue';
-    // pen.fillText(`score ${score}`,30,30);
     pen.fillText(`Score ${score}`, 50, 30);
     pen.fillStyle = 'blue';
     pen.fillRect(food.x * cs, food.y * cs, cs, cs);
-    // pen.clearRect(0,0,W,H);
     pen.fillStyle='yellow';
     Snake.DrawSanke();
 }
@@ -137,5 +158,13 @@ function getRandomfood(){
     }
     return food;
 }
+Easy.addEventListener('click',(e)=>{
+    const id=setInterval(gameLoop,125);
+})
+Medium.addEventListener('click',(e)=>{
+    const id=setInterval(gameLoop,100);
+})
+Hard.addEventListener('click',(e)=>{
+    const id=setInterval(gameLoop,90);
+})
 init();
-const id=setInterval(gameLoop,100);
