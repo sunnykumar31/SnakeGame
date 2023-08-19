@@ -169,7 +169,7 @@ function getRandomfood(){
     }
     return food;
 }
-let speed;
+let speed=120;
 function Easy(){
     speed=200;
     // const id=setInterval(gameLoop,150);
