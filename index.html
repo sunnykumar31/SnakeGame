@@ -9,15 +9,22 @@
 <body style="background-color: rgb(221, 241, 241);">
     <canvas id="canvas" width="1200" height="650" style="background-color: black; width:1200px;height: 650px; border: 20px solid gray;">
     </canvas>
+    
     <aside>
-        <table cellspacing="10">
+        <table >
             <tr>
-                <td><button id="Easy">Easy</button></td>
-                <td><button id="Medium">Medium</button></td>
-                <td><button id="Hard">Hard</button></td>
+                <td><button id="Easy" onclick="Easy()">Easy</button></td>
+                <td><button id="Medium" onclick="Medium()">Medium</button></td>
+                <td><button id="Hard" onclick="Hard()">Hard</button></td>
+            </tr>
+            <tr>
+                <td><button id="start" onclick="Start()">Start Game</button></td>
+                <td><button id="playAgain" onclick="PlayAgain()"> Play Again </button></td>
             </tr>
         </table>
     </aside>
+    
+    
     
     <script src="./script.js"></script>
 </body>

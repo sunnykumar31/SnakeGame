@@ -1,9 +1,12 @@
 const canvas=document.getElementById('canvas');
 const pen = canvas.getContext('2d');
-const buttons=document.querySelectorAll('button');
-const Easy=document.getElementById('Easy');
-const Medium=document.getElementById('Medium');
-const Hard=document.getElementById('Hard');
+const start =document.getElementById('start')
+const againPlay=document.getElementById('playAgain');
+start.style.display='none'
+againPlay.style.display='none';
+const easy=document.getElementById('Easy');
+const medium=document.getElementById('Medium');
+const hard=document.getElementById('Hard');
 pen.fillStyle='yellow';
 
 const cs=25;
@@ -49,12 +52,13 @@ const Snake={
             if(nextY*cs<0){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
-                if(score>maximumScore){
+                if(score>=maximumScore){
                     maximumScore=score;
                     pen.fillStyle='Green';
                     pen.fillText(`Highest Score ${maximumScore}`,500,300);
                 }
                 clearInterval(id);
+                againPlay.style.display="";
             }
         }
         else if(this.direction==='down'){
@@ -63,12 +67,13 @@ const Snake={
             if(nextY*cs>=H){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
-                if(score>maximumScore){
+                if(score>=maximumScore){
                     maximumScore=score;
                     pen.fillStyle='Green';
                     pen.fillText(`Highest Score ${maximumScore}`,500,300);
                 }
                 clearInterval(id);
+                againPlay.style.display="";
             }
         }
         else if(this.direction==='right'){
@@ -77,12 +82,13 @@ const Snake={
             if(nextX*cs>=W){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
-                if(score>maximumScore){
+                if(score>=maximumScore){
                     maximumScore=score;
                     pen.fillStyle='Green';
                     pen.fillText(`Highest Score ${maximumScore}`,500,300);
                 }
                 clearInterval(id);
+                againPlay.style.display="";
             }
         }
         else{
@@ -91,12 +97,17 @@ const Snake={
             if(nextX*cs<0){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
-                if(score>maximumScore){
+                if(score>=maximumScore){
                     maximumScore=score;
                     pen.fillStyle='Green';
                     pen.fillText(`Highest Score ${maximumScore}`,500,300);
                 }
                 clearInterval(id);
+                againPlay.style.display="";
+                // function PlayAgain(){
+                //     init();
+                // }
+
             }
         }
         
@@ -158,13 +169,40 @@ function getRandomfood(){
     }
     return food;
 }
-Easy.addEventListener('click',(e)=>{
-    const id=setInterval(gameLoop,125);
-})
-Medium.addEventListener('click',(e)=>{
-    const id=setInterval(gameLoop,100);
-})
-Hard.addEventListener('click',(e)=>{
-    const id=setInterval(gameLoop,90);
-})
-init();
+let speed;
+function Easy(){
+    speed=200;
+    // const id=setInterval(gameLoop,150);
+    easy.style.display='none';
+    medium.style.display='none';
+    hard.style.display='none';
+    start.style.display="";
+    
+} 
+function Medium(){
+    speed=100;
+    easy.style.display='none';
+    medium.style.display='none';
+    hard.style.display='none';
+    start.style.display="";
+}
+function Hard(){
+    speed=0;
+    easy.style.display='none';
+    medium.style.display='none';
+    hard.style.display='none';
+    start.style.display="";
+}
+function Start(){
+    init();
+    start.style.display='none';
+}
+function PlayAgain(){
+    againPlay.style.display='none';
+    window.location.reload();
+    
+}
+// const s=speed;
+const id=setInterval(gameLoop,s);
+
+
