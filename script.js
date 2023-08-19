@@ -14,7 +14,15 @@ const H=650;
 const W=1200;
 let food=null;
 let score=0;
-let maximumScore=0;
+let maximumScore;
+var storedHighestScore = localStorage.getItem('highestScore');
+// Checking if there is a stored highest score and updating the maximumScore variable
+if (storedHighestScore === null) {
+    // maximumScore = parseInt(storedHighestScore);
+    localStorage.setItem('highestScore', 0);
+}
+maximumScore=localStorage.getItem('highestScore');
+
 
 const Snake={
     inlen:3,
@@ -22,7 +30,7 @@ const Snake={
     direction:'right',
     CreateSnake:function(){
         for(let i=0;i<this.inlen;i++){
-            this.cells.push({
+            this.cells.unshift({
                 x:i,
                 y:0
             });
@@ -31,6 +39,7 @@ const Snake={
     DrawSanke:function(){
         for(let cell of this.cells){
             pen.fillRect(cell.x*cs,cell.y*cs,cs,cs);
+            
         }
         
     },
@@ -42,6 +51,7 @@ const Snake={
             food=getRandomfood();
         }
         else{
+            
             this.cells.shift();
         }
         let nextX;
@@ -54,8 +64,9 @@ const Snake={
                 pen.fillText('Game Over',500,350);
                 if(score>=maximumScore){
                     maximumScore=score;
+                    localStorage.setItem('highestScore', maximumScore);
                     pen.fillStyle='Green';
-                    pen.fillText(`Highest Score ${maximumScore}`,500,300);
+                    pen.fillText(`New Highest Score ${maximumScore}`,500,300);
                 }
                 clearInterval(id);
                 againPlay.style.display="";
@@ -69,8 +80,9 @@ const Snake={
                 pen.fillText('Game Over',500,350);
                 if(score>=maximumScore){
                     maximumScore=score;
+                    localStorage.setItem('highestScore', maximumScore);
                     pen.fillStyle='Green';
-                    pen.fillText(`Highest Score ${maximumScore}`,500,300);
+                    pen.fillText(`New Highest Score ${maximumScore}`,500,300);
                 }
                 clearInterval(id);
                 againPlay.style.display="";
@@ -84,8 +96,9 @@ const Snake={
                 pen.fillText('Game Over',500,350);
                 if(score>=maximumScore){
                     maximumScore=score;
+                    localStorage.setItem('highestScore', maximumScore);
                     pen.fillStyle='Green';
-                    pen.fillText(`Highest Score ${maximumScore}`,500,300);
+                    pen.fillText(`New Highest Score ${maximumScore}`,500,300);
                 }
                 clearInterval(id);
                 againPlay.style.display="";
@@ -99,15 +112,12 @@ const Snake={
                 pen.fillText('Game Over',500,350);
                 if(score>=maximumScore){
                     maximumScore=score;
+                    localStorage.setItem('highestScore', maximumScore);
                     pen.fillStyle='Green';
-                    pen.fillText(`Highest Score ${maximumScore}`,500,300);
+                    pen.fillText(`New Highest Score ${maximumScore}`,500,300);
                 }
                 clearInterval(id);
                 againPlay.style.display="";
-                // function PlayAgain(){
-                //     init();
-                // }
-
             }
         }
         
@@ -142,8 +152,13 @@ function init(){
 }
 
 function Draw(){
+    
     pen.clearRect(0, 0, W, H);
+    pen.font = '20px sans-serif';
+    pen.fillStyle = 'yellow';
+    pen.fillText(`Highest Score ${localStorage.getItem('highestScore')}`, 50, 50);
     pen.font = '40px sans-serif';
+    pen.fillStyle='olive';
     pen.fillText(`Score ${score}`, 50, 30);
     pen.fillStyle = 'blue';
     pen.fillRect(food.x * cs, food.y * cs, cs, cs);
@@ -169,18 +184,23 @@ function getRandomfood(){
     }
     return food;
 }
-let speed=120;
+let speed=100;
 function Easy(){
-    speed=200;
+    // speed=200;
     // const id=setInterval(gameLoop,150);
+// const id=setInterval(gameLoop,speed);
+
     easy.style.display='none';
     medium.style.display='none';
     hard.style.display='none';
     start.style.display="";
+    return 200;
     
 } 
 function Medium(){
     speed=100;
+// const id=setInterval(gameLoop,speed);
+
     easy.style.display='none';
     medium.style.display='none';
     hard.style.display='none';
@@ -188,6 +208,8 @@ function Medium(){
 }
 function Hard(){
     speed=0;
+// const id=setInterval(gameLoop,speed);
+
     easy.style.display='none';
     medium.style.display='none';
     hard.style.display='none';
