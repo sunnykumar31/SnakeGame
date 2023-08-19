@@ -202,7 +202,7 @@ function PlayAgain(){
     window.location.reload();
     
 }
-// const s=speed;
+const s=speed;
 const id=setInterval(gameLoop,s);
 
 
