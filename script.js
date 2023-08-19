@@ -30,7 +30,7 @@ const Snake={
     },
     DrawSanke:function(){
         for(let cell of this.cells){
-            pen.fillRect(cell.x*cs,cell.y*cs,cs-1,cs-1);
+            pen.fillRect(cell.x*cs,cell.y*cs,cs,cs);
         }
         
     },
