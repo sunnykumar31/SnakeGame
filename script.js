@@ -14,6 +14,8 @@ const H=650;
 const W=1200;
 let food=null;
 let score=0;
+let level="";
+let obs=[];
 let maximumScore;
 var storedHighestScore = localStorage.getItem('highestScore');
 // Checking if there is a stored highest score and updating the maximumScore variable
@@ -22,6 +24,37 @@ if (storedHighestScore === null) {
     localStorage.setItem('highestScore', 0);
 }
 maximumScore=localStorage.getItem('highestScore');
+const Obstacle={
+    // dir:'down',
+    obstlen:5,
+    obstls:[],
+    X:0,
+    Y:0,
+    CreateObstacle:function(){
+        for(let i=0;i<this.obstlen;i++){
+            this.obstls.push({
+                x1:i+this.X,
+                y1:this.Y
+            });
+            obs.push(i+this.X),
+            obs.push(this.Y);
+            // console.log(i+this.X),
+            // console.log(this.Y)
+            // console.log(obs);
+
+
+        }
+    },
+    DrawObstacle:function(){
+        pen.fillStyle='red';
+        for(let obstl of this.obstls){
+            pen.fillRect(obstl.x1*cs+200,obstl.y1*cs+200,cs,cs);
+            
+        }
+    },
+
+}
+
 
 
 const Snake={
@@ -59,6 +92,16 @@ const Snake={
         if(this.direction==='up'){
             nextX=headX;
             nextY=headY-1;
+            if(level==='h'){
+                for(let i=0;i<obs.length;i+=2){
+                    // console.log(ram);
+                    if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
+                        pen.fillText('Game Over',500,350);
+                        clearInterval(id);
+                        againPlay.style.display="";
+                    }
+                }
+            }
             if(nextY*cs<0){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
@@ -75,6 +118,16 @@ const Snake={
         else if(this.direction==='down'){
             nextX=headX;
             nextY=headY+1;
+            if(level==='h'){
+                for(let i=0;i<obs.length;i+=2){
+                    // console.log(ram);
+                    if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
+                        pen.fillText('Game Over',500,350);
+                        clearInterval(id);
+                        againPlay.style.display="";
+                    }
+                }
+            }
             if(nextY*cs>=H){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
@@ -91,6 +144,16 @@ const Snake={
         else if(this.direction==='right'){
             nextX=headX+1;
             nextY=headY;
+            if(level==='h'){
+                for(let i=0;i<obs.length;i+=2){
+                    // console.log(ram);
+                    if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
+                        pen.fillText('Game Over',500,350);
+                        clearInterval(id);
+                        againPlay.style.display="";
+                    }
+                }
+            }
             if(nextX*cs>=W){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
@@ -107,6 +170,16 @@ const Snake={
         else{
             nextX=headX-1;
             nextY=headY;
+            if(level==='h'){
+                for(let i=0;i<obs.length;i+=2){
+                    // console.log(ram);
+                    if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
+                        pen.fillText('Game Over',500,350);
+                        clearInterval(id);
+                        againPlay.style.display="";
+                    }
+                }
+            }
             if(nextX*cs<0){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
@@ -133,6 +206,7 @@ const Snake={
 
 function init(){
     Snake.CreateSnake();
+    // Obstacle.CreateObstacle();
     food=getRandomfood();
     document.addEventListener('keydown',(e)=>{
         if(e.key==='ArrowDown'){
@@ -164,6 +238,7 @@ function Draw(){
     pen.fillRect(food.x * cs, food.y * cs, cs, cs);
     pen.fillStyle='yellow';
     Snake.DrawSanke();
+    Obstacle.DrawObstacle();
 }
 
 function Update(){
@@ -171,6 +246,7 @@ function Update(){
 }
 
 function gameLoop(){
+    
     Draw();
     Update();
     
@@ -194,11 +270,11 @@ function Easy(){
     medium.style.display='none';
     hard.style.display='none';
     start.style.display="";
-    return 200;
+    // return 200;
     
 } 
 function Medium(){
-    speed=100;
+    speed=1000;
 // const id=setInterval(gameLoop,speed);
 
     easy.style.display='none';
@@ -208,8 +284,27 @@ function Medium(){
 }
 function Hard(){
     speed=0;
-// const id=setInterval(gameLoop,speed);
-
+// const id=setInterval(gameLoop,200);
+    Obstacle.X=0;
+    Obstacle.Y=-1;
+    Obstacle.CreateObstacle();
+    Obstacle.X=5;
+    Obstacle.Y=5;
+    Obstacle.CreateObstacle();
+    Obstacle.X=10;
+    Obstacle.Y=10;
+    Obstacle.CreateObstacle();
+    Obstacle.X=22;
+    Obstacle.Y=5;
+    Obstacle.CreateObstacle();
+    Obstacle.X=27;
+    Obstacle.Y=10;
+    Obstacle.CreateObstacle();
+    Obstacle.X=32;
+    Obstacle.Y=15;
+    Obstacle.CreateObstacle();
+    level='h';
+    // console.log(Obstacle);
     easy.style.display='none';
     medium.style.display='none';
     hard.style.display='none';
@@ -225,6 +320,10 @@ function PlayAgain(){
     
 }
 // const s=speed;
+console.log(obs);
 const id=setInterval(gameLoop,speed);
+
+
+
 
 
