@@ -96,7 +96,14 @@ const Snake={
                 for(let i=0;i<obs.length;i+=2){
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
+                        pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
+                        if(score>=maximumScore){
+                            maximumScore=score;
+                            localStorage.setItem('highestScore', maximumScore);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                        }
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -122,7 +129,14 @@ const Snake={
                 for(let i=0;i<obs.length;i+=2){
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
+                        pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
+                        if(score>=maximumScore){
+                            maximumScore=score;
+                            localStorage.setItem('highestScore', maximumScore);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                        }
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -148,7 +162,14 @@ const Snake={
                 for(let i=0;i<obs.length;i+=2){
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
+                        pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
+                        if(score>=maximumScore){
+                            maximumScore=score;
+                            localStorage.setItem('highestScore', maximumScore);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                        }
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -174,7 +195,14 @@ const Snake={
                 for(let i=0;i<obs.length;i+=2){
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
+                        pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
+                        if(score>=maximumScore){
+                            maximumScore=score;
+                            localStorage.setItem('highestScore', maximumScore);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                        }
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -262,10 +290,7 @@ function getRandomfood(){
 }
 let speed=100;
 function Easy(){
-    // speed=200;
-    // const id=setInterval(gameLoop,150);
-// const id=setInterval(gameLoop,speed);
-
+    speed=200;
     easy.style.display='none';
     medium.style.display='none';
     hard.style.display='none';
