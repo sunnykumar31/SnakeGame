@@ -14,9 +14,12 @@ const H=650;
 const W=1200;
 let food=null;
 let score=0;
-let level="";
+let level2="";
+let level3="";
 let obs=[];
+let prevDirection="";
 let maximumScore;
+let skip=0;
 var storedHighestScore = localStorage.getItem('highestScore');
 // Checking if there is a stored highest score and updating the maximumScore variable
 if (storedHighestScore === null) {
@@ -89,10 +92,31 @@ const Snake={
         }
         let nextX;
         let nextY;
+
         if(this.direction==='up'){
+            prevDirection='up';
             nextX=headX;
             nextY=headY-1;
-            if(level==='h'){
+            if(level2==='m'){
+                for(let cell of this.cells){
+                    console.log(cell.x*cs,"ram",cell.y*cs);
+                    console.log(nextX*cs," ",nextY*cs);
+                    // console.log()
+                    if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
+                        pen.fillStyle='red';
+                        pen.fillText('Game Over',500,350);
+                        if(score>=maximumScore){
+                            maximumScore=score;
+                            localStorage.setItem('highestScore', maximumScore);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                        }
+                        clearInterval(id);
+                        againPlay.style.display="";
+                    }
+                }
+            }
+            if(level3==='h'){
                 for(let i=0;i<obs.length;i+=2){
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
@@ -123,9 +147,26 @@ const Snake={
             }
         }
         else if(this.direction==='down'){
+            prevDirection='down';
             nextX=headX;
             nextY=headY+1;
-            if(level==='h'){
+            if(level2==='m'){
+                for(let cell of this.cells){
+                    if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
+                        pen.fillStyle='red';
+                        pen.fillText('Game Over',500,350);
+                        if(score>=maximumScore){
+                            maximumScore=score;
+                            localStorage.setItem('highestScore', maximumScore);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                        }
+                        clearInterval(id);
+                        againPlay.style.display="";
+                    }
+                }
+            }
+            if(level3==='h'){
                 for(let i=0;i<obs.length;i+=2){
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
@@ -156,9 +197,31 @@ const Snake={
             }
         }
         else if(this.direction==='right'){
+            prevDirection='right';
             nextX=headX+1;
             nextY=headY;
-            if(level==='h'){
+            if(level2==='m'){
+                for(let cell of this.cells){
+                    if(skip<=3){
+                        skip++;
+                    }
+                    console.log(cell.x*cs,"ram",cell.y*cs);
+                    console.log(nextX*cs," ",nextY*cs);
+                    if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs && skip>=4){
+                        pen.fillStyle='red';
+                        pen.fillText('Game Over',500,350);
+                        if(score>=maximumScore){
+                            maximumScore=score;
+                            localStorage.setItem('highestScore', maximumScore);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                        }
+                        clearInterval(id);
+                        againPlay.style.display="";
+                    }
+                }
+            }
+            if(level3==='h'){
                 for(let i=0;i<obs.length;i+=2){
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
@@ -188,10 +251,27 @@ const Snake={
                 againPlay.style.display="";
             }
         }
-        else{
+        else if(this.direction==='left'){
+            prevDirection='left';
             nextX=headX-1;
             nextY=headY;
-            if(level==='h'){
+            if(level2==='m'){
+                for(let cell of this.cells){
+                    if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
+                        pen.fillStyle='red';
+                        pen.fillText('Game Over',500,350);
+                        if(score>=maximumScore){
+                            maximumScore=score;
+                            localStorage.setItem('highestScore', maximumScore);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                        }
+                        clearInterval(id);
+                        againPlay.style.display="";
+                    }
+                }
+            }
+            if(level3==='h'){
                 for(let i=0;i<obs.length;i+=2){
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
@@ -221,6 +301,9 @@ const Snake={
                 againPlay.style.display="";
             }
         }
+        else{
+
+        }
         
         this.cells.push({
             x:nextX,
@@ -238,18 +321,30 @@ function init(){
     food=getRandomfood();
     document.addEventListener('keydown',(e)=>{
         if(e.key==='ArrowDown'){
-            Snake.direction='down';
+            if(prevDirection==='up'){
+                Snake.direction='up';
+            }
+            else Snake.direction='down';
         }
         else if(e.key==='ArrowUp'){
-            Snake.direction='up';
+            if(prevDirection==='down'){
+                Snake.direction='down';
+            }
+            else Snake.direction='up';
         }
         else if(e.key==='ArrowRight'){
-            Snake.direction='right';
+            if(prevDirection==='left'){
+                Snake.direction='left';
+            }
+            else Snake.direction='right';
         }
         else if(e.key==='ArrowLeft'){
-            Snake.direction='left';
+            if(prevDirection==='right'){
+                Snake.direction='right';
+            }
+            else Snake.direction='left';
         }
-        console.log(Snake.direction);
+        // console.log(Snake.direction);
     });
 }
 
@@ -301,7 +396,7 @@ function Easy(){
 function Medium(){
     speed=1000;
 // const id=setInterval(gameLoop,speed);
-
+    level2='m';
     easy.style.display='none';
     medium.style.display='none';
     hard.style.display='none';
@@ -328,7 +423,8 @@ function Hard(){
     Obstacle.X=32;
     Obstacle.Y=15;
     Obstacle.CreateObstacle();
-    level='h';
+    level2='m';
+    level3='h';
     // console.log(Obstacle);
     easy.style.display='none';
     medium.style.display='none';
