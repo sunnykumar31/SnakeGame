@@ -14,19 +14,32 @@ const H=650;
 const W=1200;
 let food=null;
 let score=0;
+let level1="";
 let level2="";
 let level3="";
 let obs=[];
 let prevDirection="";
-let maximumScore;
 let skip=0;
-var storedHighestScore = localStorage.getItem('highestScore');
-// Checking if there is a stored highest score and updating the maximumScore variable
-if (storedHighestScore === null) {
+
+if (localStorage.getItem('highestScoreEasy')=== null) {
     // maximumScore = parseInt(storedHighestScore);
-    localStorage.setItem('highestScore', 0);
+    localStorage.setItem('highestScoreEasy', 0);
 }
-maximumScore=localStorage.getItem('highestScore');
+if (localStorage.getItem('highestScoreMedium')=== null) {
+    // maximumScore = parseInt(storedHighestScore);
+    localStorage.setItem('highestScoreMedium', 0);
+}
+if (localStorage.getItem('highestScoreHard') === null) {
+    // maximumScore = parseInt(storedHighestScore);
+    localStorage.setItem('highestScoreHard', 0);
+}
+
+let maximumScoreEasy=localStorage.getItem('highestScoreEasy');
+let maximumScoreMedium=localStorage.getItem('highestScoreMedium');
+let maximumScoreHard=localStorage.getItem('highestScoreHard');
+// console.log(maximumScoreEasy+" "+maximumScoreMedium+" "+maximumScoreHard)
+
+
 const Obstacle={
     // dir:'down',
     obstlen:5,
@@ -41,11 +54,6 @@ const Obstacle={
             });
             obs.push(i+this.X),
             obs.push(this.Y);
-            // console.log(i+this.X),
-            // console.log(this.Y)
-            // console.log(obs);
-
-
         }
     },
     DrawObstacle:function(){
@@ -57,7 +65,6 @@ const Obstacle={
     },
 
 }
-
 
 
 const Snake={
@@ -105,11 +112,17 @@ const Snake={
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
-                        if(score>=maximumScore){
-                            maximumScore=score;
-                            localStorage.setItem('highestScore', maximumScore);
+                        if(level3==='h' && score>=maximumScoreHard){
+                            maximumScoreHard=score;
+                            localStorage.setItem('highestScoreHard', maximumScoreHard);
                             pen.fillStyle='Green';
-                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                            pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
+                        }
+                        else if(level2==='m' && score>=maximumScoreMedium){
+                            maximumScoreMedium=score;
+                            localStorage.setItem('highestScoreMedium', maximumScoreMedium);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
                         }
                         clearInterval(id);
                         againPlay.style.display="";
@@ -122,11 +135,11 @@ const Snake={
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
-                        if(score>=maximumScore){
-                            maximumScore=score;
-                            localStorage.setItem('highestScore', maximumScore);
+                        if(score>=maximumScoreHard){
+                            maximumScoreHard=score;
+                            localStorage.setItem('highestScoreHard', maximumScoreHard);
                             pen.fillStyle='Green';
-                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                            pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
                         }
                         clearInterval(id);
                         againPlay.style.display="";
@@ -136,11 +149,23 @@ const Snake={
             if(nextY*cs<0){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
-                if(score>=maximumScore){
-                    maximumScore=score;
-                    localStorage.setItem('highestScore', maximumScore);
+                if(level3==='h' && score>=maximumScoreHard){
+                    maximumScoreHard=score;
+                    localStorage.setItem('highestScoreHard', maximumScoreHard);
                     pen.fillStyle='Green';
-                    pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                    pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
+                }
+                else if(level2==='m' && score>=maximumScoreMedium){
+                    maximumScoreMedium=score;
+                    localStorage.setItem('highestScoreMedium', maximumScoreMedium);
+                    pen.fillStyle='Green';
+                    pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
+                }
+                else if(level2!=='m' && level3!=='h' && score>=maximumScoreEasy){
+                    maximumScoreEasy=score;
+                    localStorage.setItem('highestScoreEasy', maximumScoreEasy);
+                    pen.fillStyle='Green';
+                    pen.fillText(`New Highest Score ${maximumScoreEasy}`,500,300);
                 }
                 clearInterval(id);
                 againPlay.style.display="";
@@ -155,11 +180,17 @@ const Snake={
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
-                        if(score>=maximumScore){
-                            maximumScore=score;
-                            localStorage.setItem('highestScore', maximumScore);
+                        if(level3==='h' && score>=maximumScoreHard){
+                            maximumScoreHard=score;
+                            localStorage.setItem('highestScoreHard', maximumScoreHard);
                             pen.fillStyle='Green';
-                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                            pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
+                        }
+                        else if(level2==='m' && score>=maximumScoreMedium){
+                            maximumScoreMedium=score;
+                            localStorage.setItem('highestScoreMedium', maximumScoreMedium);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
                         }
                         clearInterval(id);
                         againPlay.style.display="";
@@ -172,11 +203,11 @@ const Snake={
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
-                        if(score>=maximumScore){
-                            maximumScore=score;
-                            localStorage.setItem('highestScore', maximumScore);
+                        if(score>=maximumScoreHard){
+                            maximumScoreHard=score;
+                            localStorage.setItem('highestScoreHard', maximumScoreHard);
                             pen.fillStyle='Green';
-                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                            pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
                         }
                         clearInterval(id);
                         againPlay.style.display="";
@@ -186,11 +217,23 @@ const Snake={
             if(nextY*cs>=H){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
-                if(score>=maximumScore){
-                    maximumScore=score;
-                    localStorage.setItem('highestScore', maximumScore);
+                if(level3==='h' && score>=maximumScoreHard){
+                    maximumScoreHard=score;
+                    localStorage.setItem('highestScoreHard', maximumScoreHard);
                     pen.fillStyle='Green';
-                    pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                    pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
+                }
+                else if(level2==='m' && score>=maximumScoreMedium){
+                    maximumScoreMedium=score;
+                    localStorage.setItem('highestScoreMedium', maximumScoreMedium);
+                    pen.fillStyle='Green';
+                    pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
+                }
+                else if(level2!=='m' && level3!=='h' && score>=maximumScoreEasy){
+                    maximumScoreEasy=score;
+                    localStorage.setItem('highestScoreEasy', maximumScoreEasy);
+                    pen.fillStyle='Green';
+                    pen.fillText(`New Highest Score ${maximumScoreEasy}`,500,300);
                 }
                 clearInterval(id);
                 againPlay.style.display="";
@@ -210,11 +253,17 @@ const Snake={
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs && skip>=4){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
-                        if(score>=maximumScore){
-                            maximumScore=score;
-                            localStorage.setItem('highestScore', maximumScore);
+                        if(level3==='h' && score>=maximumScoreHard){
+                            maximumScoreHard=score;
+                            localStorage.setItem('highestScoreHard', maximumScoreHard);
                             pen.fillStyle='Green';
-                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                            pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
+                        }
+                        else if(level2==='m' && score>=maximumScoreMedium){
+                            maximumScoreMedium=score;
+                            localStorage.setItem('highestScoreMedium', maximumScoreMedium);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
                         }
                         clearInterval(id);
                         againPlay.style.display="";
@@ -227,11 +276,11 @@ const Snake={
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
-                        if(score>=maximumScore){
-                            maximumScore=score;
-                            localStorage.setItem('highestScore', maximumScore);
+                        if(score>=maximumScoreHard){
+                            maximumScoreHard=score;
+                            localStorage.setItem('highestScoreHard', maximumScoreHard);
                             pen.fillStyle='Green';
-                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                            pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
                         }
                         clearInterval(id);
                         againPlay.style.display="";
@@ -241,11 +290,23 @@ const Snake={
             if(nextX*cs>=W){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
-                if(score>=maximumScore){
-                    maximumScore=score;
-                    localStorage.setItem('highestScore', maximumScore);
+                if(level3==='h' && score>=maximumScoreHard){
+                    maximumScoreHard=score;
+                    localStorage.setItem('highestScoreHard', maximumScoreHard);
                     pen.fillStyle='Green';
-                    pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                    pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
+                }
+                else if(level2==='m' && score>=maximumScoreMedium){
+                    maximumScoreMedium=score;
+                    localStorage.setItem('highestScoreMedium', maximumScoreMedium);
+                    pen.fillStyle='Green';
+                    pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
+                }
+                else if(level2!=='m' && level3!=='h' && score>=maximumScoreEasy){
+                    maximumScoreEasy=score;
+                    localStorage.setItem('highestScoreEasy', maximumScoreEasy);
+                    pen.fillStyle='Green';
+                    pen.fillText(`New Highest Score ${maximumScoreEasy}`,500,300);
                 }
                 clearInterval(id);
                 againPlay.style.display="";
@@ -260,11 +321,17 @@ const Snake={
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
-                        if(score>=maximumScore){
-                            maximumScore=score;
-                            localStorage.setItem('highestScore', maximumScore);
+                        if(level3==='h' && score>=maximumScoreHard){
+                            maximumScoreHard=score;
+                            localStorage.setItem('highestScoreHard', maximumScoreHard);
                             pen.fillStyle='Green';
-                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                            pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
+                        }
+                        else if(level2==='m' && score>=maximumScoreMedium){
+                            maximumScoreMedium=score;
+                            localStorage.setItem('highestScoreMedium', maximumScoreMedium);
+                            pen.fillStyle='Green';
+                            pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
                         }
                         clearInterval(id);
                         againPlay.style.display="";
@@ -277,11 +344,11 @@ const Snake={
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
-                        if(score>=maximumScore){
-                            maximumScore=score;
-                            localStorage.setItem('highestScore', maximumScore);
+                        if(score>=maximumScoreHard){
+                            maximumScoreHard=score;
+                            localStorage.setItem('highestScoreHard', maximumScoreHard);
                             pen.fillStyle='Green';
-                            pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                            pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
                         }
                         clearInterval(id);
                         againPlay.style.display="";
@@ -291,18 +358,27 @@ const Snake={
             if(nextX*cs<0){
                 pen.fillStyle='red';
                 pen.fillText('Game Over',500,350);
-                if(score>=maximumScore){
-                    maximumScore=score;
-                    localStorage.setItem('highestScore', maximumScore);
+                if(level3==='h' && score>=maximumScoreHard){
+                    maximumScoreHard=score;
+                    localStorage.setItem('highestScoreHard', maximumScoreHard);
                     pen.fillStyle='Green';
-                    pen.fillText(`New Highest Score ${maximumScore}`,500,300);
+                    pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
+                }
+                else if(level2==='m' && score>=maximumScoreMedium){
+                    maximumScoreMedium=score;
+                    localStorage.setItem('highestScoreMedium', maximumScoreMedium);
+                    pen.fillStyle='Green';
+                    pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
+                }
+                else if(level2!=='m' && level3!=='h' && score>=maximumScoreEasy){
+                    maximumScoreEasy=score;
+                    localStorage.setItem('highestScoreEasy', maximumScoreEasy);
+                    pen.fillStyle='Green';
+                    pen.fillText(`New Highest Score ${maximumScoreEasy}`,500,300);
                 }
                 clearInterval(id);
                 againPlay.style.display="";
             }
-        }
-        else{
-
         }
         
         this.cells.push({
@@ -353,7 +429,9 @@ function Draw(){
     pen.clearRect(0, 0, W, H);
     pen.font = '20px sans-serif';
     pen.fillStyle = 'yellow';
-    pen.fillText(`Highest Score ${localStorage.getItem('highestScore')}`, 50, 50);
+    if(level3==='h') pen.fillText(`Highest Score Hard ${localStorage.getItem('highestScoreHard')}`, 50, 50);
+    else if(level2==='m') pen.fillText(`Highest Score Medium ${localStorage.getItem('highestScoreMedium')}`, 50, 50);
+    else if(level1=='e') pen.fillText(`Highest Score Easy ${localStorage.getItem('highestScoreEasy')}`, 50, 50);
     pen.font = '40px sans-serif';
     pen.fillStyle='olive';
     pen.fillText(`Score ${score}`, 50, 30);
@@ -386,16 +464,15 @@ function getRandomfood(){
 let speed=100;
 function Easy(){
     speed=200;
+    level1='e';
     easy.style.display='none';
     medium.style.display='none';
     hard.style.display='none';
     start.style.display="";
-    // return 200;
     
 } 
 function Medium(){
     speed=1000;
-// const id=setInterval(gameLoop,speed);
     level2='m';
     easy.style.display='none';
     medium.style.display='none';
@@ -404,7 +481,6 @@ function Medium(){
 }
 function Hard(){
     speed=0;
-// const id=setInterval(gameLoop,200);
     Obstacle.X=0;
     Obstacle.Y=-1;
     Obstacle.CreateObstacle();
@@ -425,7 +501,6 @@ function Hard(){
     Obstacle.CreateObstacle();
     level2='m';
     level3='h';
-    // console.log(Obstacle);
     easy.style.display='none';
     medium.style.display='none';
     hard.style.display='none';
