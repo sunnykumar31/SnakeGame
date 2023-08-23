@@ -21,16 +21,18 @@ let obs=[];
 let prevDirection="";
 let skip=0;
 
+var Food_audio = new Audio('sound/carrotnom-92106.mp3');
+var Hit_audio= new Audio('sound/punch-140236.mp3');
+var BackGround_audio=new Audio('sound/game-music-loop-3-144252.mp3');
+
+
 if (localStorage.getItem('highestScoreEasy')=== null) {
-    // maximumScore = parseInt(storedHighestScore);
     localStorage.setItem('highestScoreEasy', 0);
 }
 if (localStorage.getItem('highestScoreMedium')=== null) {
-    // maximumScore = parseInt(storedHighestScore);
     localStorage.setItem('highestScoreMedium', 0);
 }
 if (localStorage.getItem('highestScoreHard') === null) {
-    // maximumScore = parseInt(storedHighestScore);
     localStorage.setItem('highestScoreHard', 0);
 }
 
@@ -91,7 +93,11 @@ const Snake={
         let headY=this.cells[this.cells.length-1].y;
         if(headX===food.x && headY===food.y){
             score++;
+            Food_audio.play();
+            // const sound_id=setInterval(,1000);
+            // clearInterval(sound_id);
             food=getRandomfood();
+            
         }
         else{
             
@@ -124,6 +130,7 @@ const Snake={
                             pen.fillStyle='Green';
                             pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
                         }
+                        Hit_audio.play();
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -141,6 +148,7 @@ const Snake={
                             pen.fillStyle='Green';
                             pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
                         }
+                        Hit_audio.play();
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -167,6 +175,7 @@ const Snake={
                     pen.fillStyle='Green';
                     pen.fillText(`New Highest Score ${maximumScoreEasy}`,500,300);
                 }
+                Hit_audio.play();
                 clearInterval(id);
                 againPlay.style.display="";
             }
@@ -192,6 +201,7 @@ const Snake={
                             pen.fillStyle='Green';
                             pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
                         }
+                        Hit_audio.play();
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -199,7 +209,6 @@ const Snake={
             }
             if(level3==='h'){
                 for(let i=0;i<obs.length;i+=2){
-                    // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
@@ -209,6 +218,7 @@ const Snake={
                             pen.fillStyle='Green';
                             pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
                         }
+                        Hit_audio.play();
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -235,6 +245,7 @@ const Snake={
                     pen.fillStyle='Green';
                     pen.fillText(`New Highest Score ${maximumScoreEasy}`,500,300);
                 }
+                Hit_audio.play();
                 clearInterval(id);
                 againPlay.style.display="";
             }
@@ -265,6 +276,7 @@ const Snake={
                             pen.fillStyle='Green';
                             pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
                         }
+                        Hit_audio.play();
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -282,6 +294,7 @@ const Snake={
                             pen.fillStyle='Green';
                             pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
                         }
+                        Hit_audio.play();
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -308,6 +321,7 @@ const Snake={
                     pen.fillStyle='Green';
                     pen.fillText(`New Highest Score ${maximumScoreEasy}`,500,300);
                 }
+                Hit_audio.play();
                 clearInterval(id);
                 againPlay.style.display="";
             }
@@ -333,6 +347,7 @@ const Snake={
                             pen.fillStyle='Green';
                             pen.fillText(`New Highest Score ${maximumScoreMedium}`,500,300);
                         }
+                        Hit_audio.play();
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -340,7 +355,6 @@ const Snake={
             }
             if(level3==='h'){
                 for(let i=0;i<obs.length;i+=2){
-                    // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
@@ -350,6 +364,7 @@ const Snake={
                             pen.fillStyle='Green';
                             pen.fillText(`New Highest Score ${maximumScoreHard}`,500,300);
                         }
+                        Hit_audio.play();
                         clearInterval(id);
                         againPlay.style.display="";
                     }
@@ -376,6 +391,7 @@ const Snake={
                     pen.fillStyle='Green';
                     pen.fillText(`New Highest Score ${maximumScoreEasy}`,500,300);
                 }
+                Hit_audio.play();
                 clearInterval(id);
                 againPlay.style.display="";
             }
@@ -420,12 +436,11 @@ function init(){
             }
             else Snake.direction='left';
         }
-        // console.log(Snake.direction);
     });
 }
 
 function Draw(){
-    
+    BackGround_audio.play();
     pen.clearRect(0, 0, W, H);
     pen.font = '20px sans-serif';
     pen.fillStyle = 'yellow';
@@ -515,8 +530,8 @@ function PlayAgain(){
     window.location.reload();
     
 }
-// const s=speed;
-console.log(obs);
+// console.log(obs);
+
 const id=setInterval(gameLoop,speed);
 
 
