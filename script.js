@@ -2,13 +2,14 @@ const canvas=document.getElementById('canvas');
 const pen = canvas.getContext('2d');
 const start =document.getElementById('start')
 const againPlay=document.getElementById('playAgain');
+// const BackGround_audio=document.getElementById('playAudio');
 start.style.display='none'
 againPlay.style.display='none';
 const easy=document.getElementById('Easy');
 const medium=document.getElementById('Medium');
 const hard=document.getElementById('Hard');
 pen.fillStyle='yellow';
-
+// BackGround_audio.play();
 const cs=25;
 const H=650;
 const W=1200;
@@ -75,15 +76,18 @@ const Snake={
     direction:'right',
     CreateSnake:function(){
         for(let i=0;i<this.inlen;i++){
-            this.cells.unshift({
+            this.cells.push({
                 x:i,
                 y:0
             });
         }
     },
     DrawSanke:function(){
-        for(let cell of this.cells){
-            pen.fillRect(cell.x*cs,cell.y*cs,cs,cs);
+        pen.fillStyle='gray';
+        pen.fillRect(this.cells[this.cells.length-1].x*cs,this.cells[this.cells.length-1].y*cs,cs,cs);
+        pen.fillStyle='brown';
+        for(let cell=0;cell<this.cells.length-1;cell++){
+            pen.fillRect(this.cells[cell].x*cs,this.cells[cell].y*cs,cs,cs);
             
         }
         
@@ -112,8 +116,8 @@ const Snake={
             nextY=headY-1;
             if(level2==='m'){
                 for(let cell of this.cells){
-                    console.log(cell.x*cs,"ram",cell.y*cs);
-                    console.log(nextX*cs," ",nextY*cs);
+                    // console.log(cell.x*cs,"ram",cell.y*cs);
+                    // con/sole.log(nextX*cs," ",nextY*cs);
                     // console.log()
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
                         pen.fillStyle='red';
@@ -259,8 +263,8 @@ const Snake={
                     if(skip<=3){
                         skip++;
                     }
-                    console.log(cell.x*cs,"ram",cell.y*cs);
-                    console.log(nextX*cs," ",nextY*cs);
+                    // console.log(cell.x*cs,"ram",cell.y*cs);
+                    // console.log(nextX*cs," ",nextY*cs);
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs && skip>=4){
                         pen.fillStyle='red';
                         pen.fillText('Game Over',500,350);
@@ -440,7 +444,7 @@ function init(){
 }
 
 function Draw(){
-    BackGround_audio.play();
+    // BackGround_audio.play();
     pen.clearRect(0, 0, W, H);
     pen.font = '20px sans-serif';
     pen.fillStyle = 'yellow';
@@ -452,7 +456,7 @@ function Draw(){
     pen.fillText(`Score ${score}`, 50, 30);
     pen.fillStyle = 'blue';
     pen.fillRect(food.x * cs, food.y * cs, cs, cs);
-    pen.fillStyle='yellow';
+    // pen.fillStyle='yellow';
     Snake.DrawSanke();
     Obstacle.DrawObstacle();
 }
@@ -531,7 +535,10 @@ function PlayAgain(){
     
 }
 // console.log(obs);
-
+// var f=true;
+// while(f) {
+    // BackGround_audio.play();
+// }
 const id=setInterval(gameLoop,speed);
 
 
