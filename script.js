@@ -60,7 +60,7 @@ const Obstacle={
         }
     },
     DrawObstacle:function(){
-        pen.fillStyle='red';
+        pen.fillStyle='rgb(250, 149, 149)';
         for(let obstl of this.obstls){
             pen.fillRect(obstl.x1*cs+200,obstl.y1*cs+200,cs,cs);
             
@@ -121,6 +121,7 @@ const Snake={
                     // console.log()
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
                         pen.fillStyle='red';
+                        pen.font='bolder 30pt Ariel';
                         pen.fillText('Game Over',500,350);
                         if(level3==='h' && score>=maximumScoreHard){
                             maximumScoreHard=score;
@@ -145,6 +146,7 @@ const Snake={
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
+                        pen.font='bolder 30pt Ariel';
                         pen.fillText('Game Over',500,350);
                         if(score>=maximumScoreHard){
                             maximumScoreHard=score;
@@ -160,6 +162,7 @@ const Snake={
             }
             if(nextY*cs<0){
                 pen.fillStyle='red';
+                pen.font='bolder 30pt Ariel';
                 pen.fillText('Game Over',500,350);
                 if(level3==='h' && score>=maximumScoreHard){
                     maximumScoreHard=score;
@@ -192,6 +195,7 @@ const Snake={
                 for(let cell of this.cells){
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
                         pen.fillStyle='red';
+                        pen.font='bolder 30pt Ariel';
                         pen.fillText('Game Over',500,350);
                         if(level3==='h' && score>=maximumScoreHard){
                             maximumScoreHard=score;
@@ -215,6 +219,7 @@ const Snake={
                 for(let i=0;i<obs.length;i+=2){
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
+                        pen.font='bolder 30pt Ariel';
                         pen.fillText('Game Over',500,350);
                         if(score>=maximumScoreHard){
                             maximumScoreHard=score;
@@ -230,6 +235,7 @@ const Snake={
             }
             if(nextY*cs>=H){
                 pen.fillStyle='red';
+                pen.font='bolder 30pt Ariel';
                 pen.fillText('Game Over',500,350);
                 if(level3==='h' && score>=maximumScoreHard){
                     maximumScoreHard=score;
@@ -267,6 +273,7 @@ const Snake={
                     // console.log(nextX*cs," ",nextY*cs);
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs && skip>=4){
                         pen.fillStyle='red';
+                        pen.font='bolder 30pt Ariel';
                         pen.fillText('Game Over',500,350);
                         if(level3==='h' && score>=maximumScoreHard){
                             maximumScoreHard=score;
@@ -291,6 +298,7 @@ const Snake={
                     // console.log(ram);
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
+                        pen.font='bolder 30pt Ariel';
                         pen.fillText('Game Over',500,350);
                         if(score>=maximumScoreHard){
                             maximumScoreHard=score;
@@ -306,6 +314,7 @@ const Snake={
             }
             if(nextX*cs>=W){
                 pen.fillStyle='red';
+                pen.font='bolder 30pt Ariel';
                 pen.fillText('Game Over',500,350);
                 if(level3==='h' && score>=maximumScoreHard){
                     maximumScoreHard=score;
@@ -338,6 +347,7 @@ const Snake={
                 for(let cell of this.cells){
                     if(nextX*cs===cell.x*cs && nextY*cs===cell.y*cs){
                         pen.fillStyle='red';
+                        pen.font='bolder 30pt Ariel';
                         pen.fillText('Game Over',500,350);
                         if(level3==='h' && score>=maximumScoreHard){
                             maximumScoreHard=score;
@@ -361,6 +371,7 @@ const Snake={
                 for(let i=0;i<obs.length;i+=2){
                     if(nextX*cs===obs[i]*cs+200 && nextY*cs===obs[i+1]*cs+200){
                         pen.fillStyle='red';
+                        pen.font='bolder 30pt Ariel';
                         pen.fillText('Game Over',500,350);
                         if(score>=maximumScoreHard){
                             maximumScoreHard=score;
@@ -376,6 +387,7 @@ const Snake={
             }
             if(nextX*cs<0){
                 pen.fillStyle='red';
+                pen.font='bolder 30pt Ariel';
                 pen.fillText('Game Over',500,350);
                 if(level3==='h' && score>=maximumScoreHard){
                     maximumScoreHard=score;
@@ -452,11 +464,11 @@ function Draw(){
     else if(level2==='m') pen.fillText(`Highest Score Medium ${localStorage.getItem('highestScoreMedium')}`, 50, 50);
     else if(level1=='e') pen.fillText(`Highest Score Easy ${localStorage.getItem('highestScoreEasy')}`, 50, 50);
     pen.font = '40px sans-serif';
-    pen.fillStyle='olive';
+    pen.fillStyle='Orange';
     pen.fillText(`Score ${score}`, 50, 30);
-    pen.fillStyle = 'blue';
+    pen.fillStyle = 'white';
     pen.fillRect(food.x * cs, food.y * cs, cs, cs);
-    // pen.fillStyle='yellow';
+    // pen.fillStyle='yellow
     Snake.DrawSanke();
     Obstacle.DrawObstacle();
 }
