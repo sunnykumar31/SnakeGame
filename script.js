@@ -21,6 +21,7 @@ let level3="";
 let obs=[];
 let prevDirection="";
 let skip=0;
+let ObstacleSkip=true;
 
 var Food_audio = new Audio('sound/carrotnom-92106.mp3');
 var Hit_audio= new Audio('sound/punch-140236.mp3');
@@ -83,7 +84,7 @@ const Snake={
         }
     },
     DrawSanke:function(){
-        pen.fillStyle='gray';
+        pen.fillStyle='grey';
         pen.fillRect(this.cells[this.cells.length-1].x*cs,this.cells[this.cells.length-1].y*cs,cs,cs);
         pen.fillStyle='brown';
         for(let cell=0;cell<this.cells.length-1;cell++){
@@ -93,15 +94,27 @@ const Snake={
         
     },
     UpdateSnake:function(){
+        // food=getRandomfood();
         let headX=this.cells[this.cells.length-1].x;
         let headY=this.cells[this.cells.length-1].y;
         if(headX===food.x && headY===food.y){
             score++;
             Food_audio.play();
-            // const sound_id=setInterval(,1000);
-            // clearInterval(sound_id);
+            // alert("ram");
             food=getRandomfood();
-            
+            if(level3==='h'){
+                while(true){
+                    ObstacleSkip=true;
+                    for(let i=0;i<obs.length;i+=2){
+                        if(food.x*cs===obs[i]*cs+200 && food.y*cs===obs[i+1]*cs+200){
+                            // alert("ram");
+                            ObstacleSkip=false;
+                            food=getRandomfood();
+                        }
+                    }
+                    if(ObstacleSkip) break;
+                }
+            }
         }
         else{
             
@@ -546,11 +559,6 @@ function PlayAgain(){
     window.location.reload();
     
 }
-// console.log(obs);
-// var f=true;
-// while(f) {
-    // BackGround_audio.play();
-// }
 const id=setInterval(gameLoop,speed);
 
 

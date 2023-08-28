@@ -7,29 +7,34 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body style="background-color: rgb(23, 51, 51);">
+    <div id="container">
+        <canvas id="canvas" width="1200" height="650" style="background-color: rgb(1, 30, 5); width:1200px;height: 650px; border: 20px solid rgb(250, 149, 149); margin: 20px; margin-bottom: 0px;" >
+        </canvas>
+        
+        <aside>
+            <table >
+                <tr>
+                    <!-- <td><button  onclick="Easy()">Level</button></td> -->
+                    <td><button id="start" onclick="Start()">Start Game</button></td>
+                    <td><button id="playAgain" onclick="PlayAgain()"> Play Again </button></td>
+                    <td><button id="Easy" onclick="Easy()">Easy</button></td>
+                    <td><button id="Medium" onclick="Medium()">Medium</button></td>
+                    <td><button id="Hard" onclick="Hard()">Hard</button></td>
+                    
+                </tr>
+                <tr>
+                    
+                </tr>
+            </table>
+        </aside>
+    </div>
     <!-- <iframe src="./sound/game-music-loop-3-144252.mp3" allow="autoplay" id="audio" style="display: none"></iframe> -->
     <!-- <audio autoplay loop id="playAudio">
         <source src="./sound/game-music-loop-3-144252.mp3">
     </audio> -->
-    <canvas id="canvas" width="1200" height="650" style="background-color: rgb(1, 30, 5); width:1200px;height: 650px; border: 20px solid rgb(250, 149, 149); margin: 20px;" >
-    </canvas>
-    
-    <aside>
-        <table >
-            <tr>
-                <td><button id="Easy" onclick="Easy()">Easy</button></td>
-                <td><button id="Medium" onclick="Medium()">Medium</button></td>
-                <td><button id="Hard" onclick="Hard()">Hard</button></td>
-            </tr>
-            <tr>
-                <td><button id="start" onclick="Start()">Start Game</button></td>
-                <td><button id="playAgain" onclick="PlayAgain()"> Play Again </button></td>
-            </tr>
-        </table>
-    </aside>
     
     
-    
+    <h2 style="color: white; text-align: center;">Make a New Record!!!</h2>
     <script src="./script.js"></script>
 </body>
 </html>
