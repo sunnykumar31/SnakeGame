@@ -8,6 +8,10 @@ againPlay.style.display='none';
 const easy=document.getElementById('Easy');
 const medium=document.getElementById('Medium');
 const hard=document.getElementById('Hard');
+const up=document.getElementById('up');
+const down=document.getElementById('down');
+const right=document.getElementById('right');
+const left=document.getElementById('left')
 pen.fillStyle='yellow';
 // BackGround_audio.play();
 const cs=25;
@@ -440,6 +444,9 @@ function init(){
     Snake.CreateSnake();
     // Obstacle.CreateObstacle();
     food=getRandomfood();
+
+    
+
     document.addEventListener('keydown',(e)=>{
         if(e.key==='ArrowDown'){
             if(prevDirection==='up'){
@@ -466,6 +473,7 @@ function init(){
             else Snake.direction='left';
         }
     });
+    
 }
 
 function Draw(){
@@ -563,5 +571,28 @@ const id=setInterval(gameLoop,speed);
 
 
 
-
+function movedown(){
+    if(prevDirection==='up'){
+        Snake.direction='up';
+    }
+    else Snake.direction='down';
+}
+function moveup(){
+    if(prevDirection==='down'){
+        Snake.direction='down';
+    }
+    else Snake.direction='up';
+}
+function moveleft(){
+    if(prevDirection==='right'){
+        Snake.direction='right';
+    }
+    else Snake.direction='left';
+}
+function moveright(){
+    if(prevDirection==='left'){
+        Snake.direction='left';
+    }
+    else Snake.direction='right';
+}
 
