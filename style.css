@@ -44,7 +44,68 @@ button:hover{
     box-shadow: 2px 2px 2px rgb(1, 37, 2);
     /* transition: width 2s; */
 }
-.ArrowH1{
+
+@media screen and (min-width: 401px) and (max-width: 1200px) {
+    /* canvas{
+        width: 500;
+        height: 600;
+    }
+    container{
+        display: block;
+    } */
+    table{
+        margin: 10px auto;
+        display: flex;
+        /* justify-content: space-evenly;
+        flex-direction: column; */
+    }
+    td{
+        margin: 10px auto;
+        display: flex;
+        /* justify-content: space-evenly;
+        flex-direction: column; */
+        /* width: 200px; */
+    }
+    td:hover{
+        /* background-color: gold; */
+    }
+    button{
+        /* width: 100px; */
+        /* height: 25px; */
+        box-shadow: 2px 2px 2px rgb(141, 247, 162);
+        /* border: 0px; */
+        font-size: .5rem;
+        cursor: pointer;
+        font-weight: bolder;
+        background-color: rgb(223, 230, 223);
+    }
+    button:hover{
+        cursor: pointer;
+        color: rgb(3, 31, 3);
+        font-weight: bolder;
+        /* background-color: rgb(122, 122, 128); */
+        box-shadow: 2px 2px 2px rgb(1, 37, 2);
+        /* transition: width 2s; */
+    }
+    .ArrowH1{
+        width: 50px;
+        height: 50px;
+    }
+    .ArrowH1 button{
+        width: 25px;
+        height: 25px
+    }
+    .ArrowH2{
+        width: 50px;
+        height: 100px;
+        margin-top:50px;
+    }
+    .ArrowH2 button{
+        width: 25px;
+        height: 25px
+    }
+  }
+  .ArrowH1{
     width: 150px;
     height: 150px;
 }

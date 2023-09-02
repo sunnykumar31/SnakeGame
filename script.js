@@ -12,6 +12,14 @@ const up=document.getElementById('up');
 const down=document.getElementById('down');
 const right=document.getElementById('right');
 const left=document.getElementById('left')
+const arrowH1=document.querySelector('.ArrowH1');
+const arrowH2=document.querySelector('.ArrowH2');
+// arrowH1.classList.remove('ArrowH1');
+// arrowH2.classList.remove('ArrowH2');
+// right.style.display='none';
+// left.style.display='none';
+// up.style.display='none';
+// down.style.display='none';
 pen.fillStyle='yellow';
 // BackGround_audio.play();
 const cs=25;
@@ -475,6 +483,12 @@ function init(){
     });
     
 }
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    // Call your drawing functions here (e.g., drawShapes())
+}
+resizeCanvas()
 
 function Draw(){
     // BackGround_audio.play();
