@@ -14,17 +14,17 @@ const right=document.getElementById('right');
 const left=document.getElementById('left')
 const arrowH1=document.querySelector('.ArrowH1');
 const arrowH2=document.querySelector('.ArrowH2');
-// arrowH1.classList.remove('ArrowH1');
-// arrowH2.classList.remove('ArrowH2');
-// right.style.display='none';
-// left.style.display='none';
-// up.style.display='none';
-// down.style.display='none';
+arrowH1.classList.remove('ArrowH1');
+arrowH2.classList.remove('ArrowH2');
+right.style.display='none';
+left.style.display='none';
+up.style.display='none';
+down.style.display='none';
 pen.fillStyle='yellow';
 // BackGround_audio.play();
 const cs=25;
-const H=650;
-const W=1200;
+const H=canvas.height;
+const W=canvas.width;
 let food=null;
 let score=0;
 let level1="";
@@ -38,6 +38,13 @@ let ObstacleSkip=true;
 var Food_audio = new Audio('sound/carrotnom-92106.mp3');
 var Hit_audio= new Audio('sound/punch-140236.mp3');
 var BackGround_audio=new Audio('sound/game-music-loop-3-144252.mp3');
+
+// function resizeCanvas() {
+//     canvas.width = window.innerWidth+200;
+//     canvas.height = window.innerHeight+200;
+//     // Call your drawing functions here (e.g., drawShapes())
+// }
+// resizeCanvas()
 
 
 if (localStorage.getItem('highestScoreEasy')=== null) {
@@ -483,12 +490,7 @@ function init(){
     });
     
 }
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    // Call your drawing functions here (e.g., drawShapes())
-}
-resizeCanvas()
+
 
 function Draw(){
     // BackGround_audio.play();
